@@ -21,12 +21,13 @@ dependencies:
   freezed_annotation: ^2.4.4
   bloc_test: ^9.1.7
   mocktail: ^1.0.4
-  auto_route: ^8.1.4
+  auto_route: 8.1.2
+  flutter_hooks: ^0.20.5
 
 dev_dependencies:
   flutter_test:
     sdk: flutter  
-  flutter_lints: ^2.0.0
+  flutter_lints: ^4.0.0
   build_runner: ^2.4.9
   retrofit_generator: ^8.2.1
   injectable_generator: ^2.6.1
