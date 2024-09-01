@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:movie_index/domain/featured_collections/models/featured_movie.dart';
 
-part 'feature_movie_dto.g.dart';
+part 'featured_movie_dto.g.dart';
 
 @JsonSerializable(createToJson: false)
 class FeaturedMovieDTO {

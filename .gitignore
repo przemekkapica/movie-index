@@ -9,6 +9,7 @@
 .history
 .svn/
 migrate_working_dir/
+assets/.tmdb_bearer_token.txt
 
 # IntelliJ related
 *.iml
