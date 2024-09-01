@@ -11,5 +11,8 @@ abstract class DiscoverPageState with _$DiscoverPageState {
 
   const factory DiscoverPageState.idle({
     required List<FeaturedMovie> popularMovies,
+    required List<FeaturedMovie> topRatedMovies,
+    required List<FeaturedMovie> nowPlayingMovies,
+    required List<FeaturedMovie> upcomingMovies,
   }) = DiscoverPageStateIdle;
 }

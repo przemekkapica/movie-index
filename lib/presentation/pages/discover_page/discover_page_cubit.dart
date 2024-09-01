@@ -13,9 +13,26 @@ class DiscoverPageCubit extends Cubit<DiscoverPageState> {
 
   Future<void> init() async {
     try {
-      final popularMovies = await _collectionsRepository.getPopularMovies();
+      emit(const DiscoverPageState.error());
+      final featuredCollections = await Future.wait([
+        _collectionsRepository.getPopularMovies(),
+        _collectionsRepository.getTopRatedMovies(),
+        _collectionsRepository.getNowPlayingMovies(),
+        _collectionsRepository.getUpcomingMovies(),
+      ]);
 
-      emit(DiscoverPageState.idle(popularMovies: popularMovies));
+      // Shuffled just for the presentation purpose
+      // (it usually yields very familiar results as popular movies)
+      featuredCollections[2].shuffle();
+
+      emit(
+        DiscoverPageState.idle(
+          popularMovies: featuredCollections[0],
+          topRatedMovies: featuredCollections[1],
+          nowPlayingMovies: featuredCollections[2],
+          upcomingMovies: featuredCollections[3],
+        ),
+      );
     } catch (_) {
       emit(const DiscoverPageState.error());
     }

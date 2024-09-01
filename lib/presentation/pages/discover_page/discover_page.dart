@@ -1,9 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:gap/gap.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:movie_index/presentation/pages/discover_page/discover_page_cubit.dart';
 import 'package:movie_index/presentation/pages/discover_page/discover_page_state.dart';
+import 'package:movie_index/presentation/pages/discover_page/widgets/collection_carousel_section.dart';
 
 @RoutePage()
 class DiscoverPage extends HookWidget {
@@ -23,10 +25,13 @@ class DiscoverPage extends HookWidget {
     );
 
     return Scaffold(
-      body: state.map(
-        loading: (_) => const _LoadingState(),
-        error: (_) => const _ErrorState(),
-        idle: (state) => _IdleState(state: state),
+      body: SafeArea(
+        bottom: false,
+        child: state.map(
+          loading: (_) => const _LoadingState(),
+          error: (_) => const _ErrorState(),
+          idle: (state) => _IdleState(state: state),
+        ),
       ),
     );
   }
@@ -40,7 +45,27 @@ class _IdleState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    final featuredCollectionsData = [
+      CollectionData(title: 'Popular', collection: state.popularMovies),
+      CollectionData(title: 'Now playing', collection: state.nowPlayingMovies),
+      CollectionData(title: 'Top rated', collection: state.topRatedMovies),
+      CollectionData(title: 'Upcoming', collection: state.upcomingMovies),
+    ];
+
+    return Padding(
+      padding: const EdgeInsets.only(left: 12),
+      child: ListView.separated(
+        itemCount: featuredCollectionsData.length,
+        itemBuilder: (context, index) {
+          final collectionData = featuredCollectionsData[index];
+
+          return CollectionCarouselSection(
+            collectionData: collectionData,
+          );
+        },
+        separatorBuilder: (context, index) => const Gap(32),
+      ),
+    );
   }
 }
 
@@ -49,7 +74,9 @@ class _LoadingState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const Center(
+      child: CircularProgressIndicator(),
+    );
   }
 }
 
@@ -58,6 +85,8 @@ class _ErrorState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const Center(
+      child: Text('Ooops, something went wrong'),
+    );
   }
 }
