@@ -13,7 +13,6 @@ class DiscoverPageCubit extends Cubit<DiscoverPageState> {
 
   Future<void> init() async {
     try {
-      emit(const DiscoverPageState.error());
       final featuredCollections = await Future.wait([
         _collectionsRepository.getPopularMovies(),
         _collectionsRepository.getTopRatedMovies(),
