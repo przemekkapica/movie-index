@@ -13,24 +13,27 @@ class FeaturedCollectionsRepositoryImpl
   Future<FeaturedCollection> getPopularMovies() async {
     final result = await _dataSource.getPopularMovies();
 
-    return result.results.map((movie) => movie.toDomain()).toList();
+    return result.toDomain();
   }
 
   @override
-  Future<FeaturedCollection> getNowPlayingMovies() {
-    // TODO: implement getNowPlayingMovies
-    throw UnimplementedError();
+  Future<FeaturedCollection> getNowPlayingMovies() async {
+    final result = await _dataSource.getNowPlayingMovies();
+
+    return result.toDomain();
   }
 
   @override
-  Future<FeaturedCollection> getTopRatedMovies() {
-    // TODO: implement getTopRatedMovies
-    throw UnimplementedError();
+  Future<FeaturedCollection> getTopRatedMovies() async {
+    final result = await _dataSource.getTopRatedMovies();
+
+    return result.toDomain();
   }
 
   @override
-  Future<FeaturedCollection> getUpcomingMovies() {
-    // TODO: implement getUpcomingMovies
-    throw UnimplementedError();
+  Future<FeaturedCollection> getUpcomingMovies() async {
+    final result = await _dataSource.getUpcomingMovies();
+
+    return result.toDomain();
   }
 }
