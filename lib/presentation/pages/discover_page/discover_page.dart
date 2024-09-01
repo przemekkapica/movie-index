@@ -6,6 +6,7 @@ import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:movie_index/presentation/pages/discover_page/discover_page_cubit.dart';
 import 'package:movie_index/presentation/pages/discover_page/discover_page_state.dart';
 import 'package:movie_index/presentation/pages/discover_page/widgets/collection_carousel_section.dart';
+import 'package:movie_index/presentation/theme/app_dimens.dart';
 
 @RoutePage()
 class DiscoverPage extends HookWidget {
@@ -53,7 +54,7 @@ class _IdleState extends StatelessWidget {
     ];
 
     return Padding(
-      padding: const EdgeInsets.only(left: 16),
+      padding: const EdgeInsets.only(left: AppDimens.v16),
       child: ListView.separated(
         itemCount: featuredCollectionsData.length,
         itemBuilder: (context, index) {
@@ -63,7 +64,7 @@ class _IdleState extends StatelessWidget {
             collectionData: collectionData,
           );
         },
-        separatorBuilder: (context, index) => const Gap(32),
+        separatorBuilder: (context, index) => const Gap(AppDimens.v32),
       ),
     );
   }

@@ -11,6 +11,7 @@ import 'package:movie_index/presentation/extensions/date_time_extension.dart';
 import 'package:movie_index/presentation/extensions/duration_extension.dart';
 import 'package:movie_index/presentation/pages/movie_details_page/movie_details_page_cubit.dart';
 import 'package:movie_index/presentation/pages/movie_details_page/movie_details_page_state.dart';
+import 'package:movie_index/presentation/theme/app_dimens.dart';
 
 @RoutePage()
 class MovieDetailsPage extends HookWidget {
@@ -43,7 +44,7 @@ class MovieDetailsPage extends HookWidget {
         leading: IconButton(
           icon: const Icon(
             Icons.chevron_left_rounded,
-            size: 32,
+            size: AppDimens.v32,
           ),
           onPressed: context.router.maybePop,
         ),
@@ -104,7 +105,7 @@ class _DetailsMainContent extends StatelessWidget {
     ];
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(
+      padding: const EdgeInsets.symmetric(horizontal: AppDimens.v16).copyWith(
         top: MediaQuery.sizeOf(context).height * 0.47,
       ),
       child: SingleChildScrollView(
@@ -112,15 +113,15 @@ class _DetailsMainContent extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(details.title),
-            const Gap(8),
+            const Gap(AppDimens.v8),
             _BaseInfoSection(details: details),
-            const Gap(16),
+            const Gap(AppDimens.v16),
             _RatingSection(details: details),
-            const Gap(16),
+            const Gap(AppDimens.v16),
             Text(details.description.trim()),
-            const Gap(48),
+            const Gap(AppDimens.v48),
             _DetailedInfoSection(singleInfoSections: singleInfoSections),
-            const Gap(16),
+            const Gap(AppDimens.v16),
           ],
         ),
       ),
@@ -150,7 +151,7 @@ class _DetailedInfoSection extends StatelessWidget {
         );
       },
       separatorBuilder: (context, index) => const Column(
-        children: [Gap(8), Divider(), Gap(8)],
+        children: [Gap(AppDimens.v8), Divider(), Gap(AppDimens.v8)],
       ),
       itemCount: singleInfoSections.length,
     );
@@ -170,9 +171,9 @@ class _RatingSection extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Icon(Icons.star_rate_rounded),
-        const Gap(4),
+        const Gap(AppDimens.v4),
         Text(details.rating.toStringAsFixed(1)),
-        const Gap(2),
+        const Gap(AppDimens.v2),
         Text('(${details.voteCount})'),
       ],
     );
@@ -192,12 +193,12 @@ class _BaseInfoSection extends StatelessWidget {
       children: [
         Text(details.releaseDate.formatYYYY),
         const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8),
+          padding: EdgeInsets.symmetric(horizontal: AppDimens.v8),
           child: Text('|'),
         ),
         Text(details.runtime.formatHHmm),
         const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8),
+          padding: EdgeInsets.symmetric(horizontal: AppDimens.v8),
           child: Text('|'),
         ),
         Text(
@@ -260,7 +261,7 @@ class _SingleInfoSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(title),
-        const Gap(8),
+        const Gap(AppDimens.v8),
         Text(value),
       ],
     );

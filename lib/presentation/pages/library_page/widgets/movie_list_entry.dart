@@ -5,6 +5,9 @@ import 'package:gap/gap.dart';
 import 'package:movie_index/domain/base_index/models/base_movie.dart';
 import 'package:movie_index/presentation/extensions/date_time_extension.dart';
 import 'package:movie_index/presentation/routing/app_router.gr.dart';
+import 'package:movie_index/presentation/theme/app_dimens.dart';
+
+const _posterHeight = 120.0;
 
 class MovieListEntry extends StatelessWidget {
   const MovieListEntry({
@@ -21,12 +24,12 @@ class MovieListEntry extends StatelessWidget {
         context.router.push(MovieDetailsRoute(movieId: movie.id));
       },
       child: SizedBox(
-        height: 120,
+        height: _posterHeight,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _MoviePoster(movie: movie),
-            const Gap(16),
+            const Gap(AppDimens.v16),
             _MovieBasicData(movie: movie),
           ],
         ),
@@ -49,19 +52,19 @@ class _MovieBasicData extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(movie.title),
-          const Gap(8),
+          const Gap(AppDimens.v8),
           Text(movie.releaseDate.formatYYYY),
           const Spacer(),
           Row(
             children: [
               const Icon(Icons.star_rate_rounded),
-              const Gap(4),
+              const Gap(AppDimens.v4),
               Text(movie.rating.toStringAsFixed(1)),
-              const Gap(2),
+              const Gap(AppDimens.v2),
               Text('(${movie.voteCount})'),
             ],
           ),
-          const Gap(4),
+          const Gap(AppDimens.v4),
         ],
       ),
     );
@@ -82,12 +85,12 @@ class _MoviePoster extends StatelessWidget {
       imageBuilder: (context, imageProvider) {
         return ClipRRect(
           borderRadius: const BorderRadius.all(
-            Radius.circular(8),
+            Radius.circular(AppDimens.v8),
           ),
           child: Image(image: imageProvider),
         );
       },
-      height: 120,
+      height: _posterHeight,
     );
   }
 }

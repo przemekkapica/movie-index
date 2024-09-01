@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:movie_index/domain/featured_collections/models/featured_movie.dart';
+import 'package:movie_index/presentation/theme/app_dimens.dart';
 
 class CollectionData {
   CollectionData({
@@ -16,6 +17,7 @@ class CollectionData {
 
 const _fadeInCarouselDuration = Duration(milliseconds: 150);
 const _fadeOutCarouselDuration = Duration(milliseconds: 150);
+const _carouselHeight = 200.0;
 
 class CollectionCarouselSection extends StatelessWidget {
   const CollectionCarouselSection({
@@ -34,7 +36,7 @@ class CollectionCarouselSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(title),
-        const Gap(12),
+        const Gap(AppDimens.v12),
         _CollectionCarousel(collection: collection),
       ],
     );
@@ -53,7 +55,7 @@ class _CollectionCarousel extends StatelessWidget {
     return CarouselSlider.builder(
       options: CarouselOptions(
         viewportFraction: 0.4,
-        height: 200,
+        height: _carouselHeight,
         padEnds: false,
       ),
       itemCount: collection.length,

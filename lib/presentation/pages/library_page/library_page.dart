@@ -6,6 +6,7 @@ import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:movie_index/presentation/pages/library_page/library_page_cubit.dart';
 import 'package:movie_index/presentation/pages/library_page/library_page_state.dart';
 import 'package:movie_index/presentation/pages/library_page/widgets/movie_list_entry.dart';
+import 'package:movie_index/presentation/theme/app_dimens.dart';
 
 @RoutePage()
 class LibraryPage extends HookWidget {
@@ -54,7 +55,7 @@ class _IdleState extends HookWidget {
     final movies = state.movies;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: AppDimens.v16),
       child: NotificationListener<ScrollEndNotification>(
         onNotification: (notification) {
           if (notification.metrics.pixels + 100 >
@@ -74,13 +75,13 @@ class _IdleState extends HookWidget {
                   return MovieListEntry(movie: movie);
                 },
                 separatorBuilder: (context, index) => const Column(
-                  children: [Gap(4), Divider(), Gap(8)],
+                  children: [Gap(AppDimens.v4), Divider(), Gap(AppDimens.v8)],
                 ),
               ),
             ),
             if (state.isLoadingNextPage) ...[
               const CircularProgressIndicator(),
-              const Gap(16),
+              const Gap(AppDimens.v16),
             ],
           ],
         ),
