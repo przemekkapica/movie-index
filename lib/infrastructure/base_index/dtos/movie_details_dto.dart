@@ -47,7 +47,7 @@ class MovieDetailsDTO {
   dynamic belongsToCollection;
   @JsonKey(name: 'budget')
   int budget;
-  @JsonKey(name: 'genre')
+  @JsonKey(name: 'genres')
   List<GenreDTO> genres;
   @JsonKey(name: 'homepage')
   String homepage;
@@ -164,7 +164,7 @@ class CastDTO {
   @JsonKey(name: 'id')
   int id;
   @JsonKey(name: 'known_for_department')
-  DepartmentDTO knownForDepartment;
+  String knownForDepartment;
   @JsonKey(name: 'name')
   String name;
   @JsonKey(name: 'original_name')
@@ -182,36 +182,9 @@ class CastDTO {
   @JsonKey(name: 'order')
   int? order;
   @JsonKey(name: 'department')
-  DepartmentDTO? department;
+  String? department;
   @JsonKey(name: 'job')
   String? job;
-}
-
-enum DepartmentDTO {
-  @JsonValue('Acting')
-  acting,
-  @JsonValue('Art')
-  art,
-  @JsonValue('Camera')
-  camera,
-  @JsonValue('Costume & Make-Up')
-  costumeMakeUp,
-  @JsonValue('Crew')
-  crew,
-  @JsonValue('Directing')
-  directing,
-  @JsonValue('Editing')
-  editing,
-  @JsonValue('Lighting')
-  lighting,
-  @JsonValue('Production')
-  production,
-  @JsonValue('Sound')
-  sound,
-  @JsonValue('Visual Effects')
-  visualEffects,
-  @JsonValue('Writing')
-  writing
 }
 
 @JsonSerializable(createToJson: false)

@@ -12,7 +12,6 @@ class TMDBApiAuthInterceptor extends Interceptor {
     // TODO: Change getting bearer token approach
     final bearerToken =
         await rootBundle.loadString('assets/.tmdb_bearer_token.txt');
-
     options.headers.addAll({
       'accept': 'application/json',
       'Authorization': 'Bearer $bearerToken',

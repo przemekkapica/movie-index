@@ -19,6 +19,7 @@ class RoutesDefinitions {
         page: LibraryRoute.page,
         initial: true,
       ),
+      AdaptiveRoute(page: MovieDetailsRoute.page),
     ],
   );
 

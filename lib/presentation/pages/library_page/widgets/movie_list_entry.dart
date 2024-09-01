@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:movie_index/domain/base_index/models/base_movie.dart';
 import 'package:movie_index/presentation/extensions/date_time_extension.dart';
+import 'package:movie_index/presentation/routing/app_router.gr.dart';
 
 class MovieListEntry extends StatelessWidget {
   const MovieListEntry({
@@ -16,7 +18,7 @@ class MovieListEntry extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // TODO: navigate to movie details
+        context.router.push(MovieDetailsRoute(movieId: movie.id));
       },
       child: SizedBox(
         height: 120,
@@ -48,7 +50,7 @@ class _MovieBasicData extends StatelessWidget {
         children: [
           Text(movie.title),
           const Gap(8),
-          Text(movie.releaseDate.formatYYYY()),
+          Text(movie.releaseDate.formatYYYY),
           const Spacer(),
           Row(
             children: [

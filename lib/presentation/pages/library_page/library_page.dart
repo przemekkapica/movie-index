@@ -79,7 +79,6 @@ class _IdleState extends HookWidget {
               ),
             ),
             if (state.isLoadingNextPage) ...[
-              // const Gap(16),
               const CircularProgressIndicator(),
               const Gap(16),
             ],

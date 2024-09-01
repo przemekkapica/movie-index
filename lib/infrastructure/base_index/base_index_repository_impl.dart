@@ -23,7 +23,10 @@ class BaseIndexRepositoryImpl implements BaseIndexRepository {
     String? extraParams,
   ) async {
     final params = extraParams ?? 'credits';
-    final result = await _dataSource.getMovieDetails(id, params);
+    final result = await _dataSource.getMovieDetails(
+      id.toString(),
+      params,
+    );
 
     return result.toDomain();
   }

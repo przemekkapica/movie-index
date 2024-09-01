@@ -15,9 +15,9 @@ abstract interface class BaseIndexDataSource {
   @GET('discover/movie')
   Future<GetMoviesDTO> getMovies(@Query('page') int? page);
 
-  @GET('movie')
+  @GET('movie/{id}')
   Future<MovieDetailsDTO> getMovieDetails(
-    @Path() int id,
+    @Path() String id,
     @Query('append_to_response') String extraParams,
   );
 }
