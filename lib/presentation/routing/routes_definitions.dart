@@ -9,6 +9,7 @@ class RoutesDefinitions {
         page: DiscoverRoute.page,
         initial: true,
       ),
+      AdaptiveRoute(page: MovieDetailsRoute.page),
     ],
   );
 
