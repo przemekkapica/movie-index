@@ -6,6 +6,7 @@ import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:movie_index/presentation/pages/discover_page/discover_page_cubit.dart';
 import 'package:movie_index/presentation/pages/discover_page/discover_page_state.dart';
 import 'package:movie_index/presentation/pages/discover_page/widgets/collection_carousel_section.dart';
+import 'package:movie_index/presentation/theme/app_colors.dart';
 import 'package:movie_index/presentation/theme/app_dimens.dart';
 
 @RoutePage()
@@ -26,6 +27,7 @@ class DiscoverPage extends HookWidget {
     );
 
     return Scaffold(
+      backgroundColor: AppColors.background,
       body: SafeArea(
         bottom: false,
         child: state.map(

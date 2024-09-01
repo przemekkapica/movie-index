@@ -5,7 +5,9 @@ import 'package:gap/gap.dart';
 import 'package:movie_index/domain/base_index/models/base_movie.dart';
 import 'package:movie_index/presentation/extensions/date_time_extension.dart';
 import 'package:movie_index/presentation/routing/app_router.gr.dart';
+import 'package:movie_index/presentation/theme/app_colors.dart';
 import 'package:movie_index/presentation/theme/app_dimens.dart';
+import 'package:movie_index/presentation/theme/app_typo.dart';
 
 const _posterHeight = 120.0;
 
@@ -51,22 +53,47 @@ class _MovieBasicData extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(movie.title),
+          Text(movie.title, style: AppTypo.v2),
           const Gap(AppDimens.v8),
-          Text(movie.releaseDate.formatYYYY),
-          const Spacer(),
-          Row(
-            children: [
-              const Icon(Icons.star_rate_rounded),
-              const Gap(AppDimens.v4),
-              Text(movie.rating.toStringAsFixed(1)),
-              const Gap(AppDimens.v2),
-              Text('(${movie.voteCount})'),
-            ],
+          Text(
+            movie.releaseDate.formatYYYY,
+            style: AppTypo.v8,
           ),
+          const Spacer(),
+          _RatingSection(movie: movie),
           const Gap(AppDimens.v4),
         ],
       ),
+    );
+  }
+}
+
+class _RatingSection extends StatelessWidget {
+  const _RatingSection({
+    required this.movie,
+  });
+
+  final BaseMovie movie;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        const Icon(
+          Icons.star_rate_rounded,
+          color: AppColors.typo,
+        ),
+        const Gap(AppDimens.v4),
+        Text(
+          movie.rating.toStringAsFixed(1),
+          style: AppTypo.v5,
+        ),
+        const Gap(AppDimens.v2),
+        Text(
+          '(${movie.voteCount})',
+          style: AppTypo.v4.copyWith(color: AppColors.subtypo),
+        ),
+      ],
     );
   }
 }
@@ -85,7 +112,7 @@ class _MoviePoster extends StatelessWidget {
       imageBuilder: (context, imageProvider) {
         return ClipRRect(
           borderRadius: const BorderRadius.all(
-            Radius.circular(AppDimens.v8),
+            Radius.circular(AppDimens.v4),
           ),
           child: Image(image: imageProvider),
         );

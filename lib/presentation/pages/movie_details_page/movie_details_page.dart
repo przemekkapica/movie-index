@@ -11,7 +11,10 @@ import 'package:movie_index/presentation/extensions/date_time_extension.dart';
 import 'package:movie_index/presentation/extensions/duration_extension.dart';
 import 'package:movie_index/presentation/pages/movie_details_page/movie_details_page_cubit.dart';
 import 'package:movie_index/presentation/pages/movie_details_page/movie_details_page_state.dart';
+import 'package:movie_index/presentation/theme/app_colors.dart';
 import 'package:movie_index/presentation/theme/app_dimens.dart';
+import 'package:movie_index/presentation/theme/app_typo.dart';
+import 'package:movie_index/presentation/widgets/app_divider.dart';
 
 @RoutePage()
 class MovieDetailsPage extends HookWidget {
@@ -37,7 +40,7 @@ class MovieDetailsPage extends HookWidget {
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-      backgroundColor: Colors.grey,
+      backgroundColor: AppColors.background,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -45,6 +48,7 @@ class MovieDetailsPage extends HookWidget {
           icon: const Icon(
             Icons.chevron_left_rounded,
             size: AppDimens.v32,
+            color: AppColors.typo,
           ),
           onPressed: context.router.maybePop,
         ),
@@ -112,13 +116,13 @@ class _DetailsMainContent extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(details.title),
+            Text(details.title, style: AppTypo.v1),
             const Gap(AppDimens.v8),
             _BaseInfoSection(details: details),
             const Gap(AppDimens.v16),
             _RatingSection(details: details),
             const Gap(AppDimens.v16),
-            Text(details.description.trim()),
+            Text(details.description.trim(), style: AppTypo.v6),
             const Gap(AppDimens.v48),
             _DetailedInfoSection(singleInfoSections: singleInfoSections),
             const Gap(AppDimens.v16),
@@ -151,7 +155,7 @@ class _DetailedInfoSection extends StatelessWidget {
         );
       },
       separatorBuilder: (context, index) => const Column(
-        children: [Gap(AppDimens.v8), Divider(), Gap(AppDimens.v8)],
+        children: [Gap(AppDimens.v8), AppDivider(), Gap(AppDimens.v8)],
       ),
       itemCount: singleInfoSections.length,
     );
@@ -167,15 +171,33 @@ class _RatingSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Icon(Icons.star_rate_rounded),
-        const Gap(AppDimens.v4),
-        Text(details.rating.toStringAsFixed(1)),
-        const Gap(AppDimens.v2),
-        Text('(${details.voteCount})'),
-      ],
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(AppDimens.v4),
+        color: AppColors.tag,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: AppDimens.v8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(
+              Icons.star_rate_rounded,
+              color: AppColors.typo,
+            ),
+            const Gap(AppDimens.v4),
+            Text(
+              details.rating.toStringAsFixed(1),
+              style: AppTypo.v2,
+            ),
+            const Gap(AppDimens.v2),
+            Text(
+              '(${details.voteCount})',
+              style: AppTypo.v4.copyWith(color: AppColors.subtypo),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -189,17 +211,19 @@ class _BaseInfoSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final typo = AppTypo.v8.copyWith(color: AppColors.subtypo);
+
     return Row(
       children: [
-        Text(details.releaseDate.formatYYYY),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppDimens.v8),
-          child: Text('|'),
+        Text(details.releaseDate.formatYYYY, style: typo),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppDimens.v8),
+          child: Text('|', style: typo),
         ),
-        Text(details.runtime.formatHHmm),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppDimens.v8),
-          child: Text('|'),
+        Text(details.runtime.formatHHmm, style: typo),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppDimens.v8),
+          child: Text('|', style: typo),
         ),
         Text(
           details.genres
@@ -207,6 +231,7 @@ class _BaseInfoSection extends StatelessWidget {
               .map((genre) => genre.name)
               .toList()
               .join(', '),
+          style: typo,
         ),
       ],
     );
@@ -236,7 +261,7 @@ class _GradientOnPosterBackground extends StatelessWidget {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [Colors.transparent, Colors.white],
+              colors: [Colors.transparent, AppColors.background],
               stops: [0, .5],
             ),
           ),
@@ -260,9 +285,12 @@ class _SingleInfoSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title),
+        Text(title, style: AppTypo.v8),
         const Gap(AppDimens.v8),
-        Text(value),
+        Text(
+          value,
+          style: AppTypo.v5.copyWith(color: AppColors.subtypo),
+        ),
       ],
     );
   }

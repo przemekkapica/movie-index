@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:movie_index/core/di/di_config.dart';
 import 'package:movie_index/presentation/routing/app_router.dart';
+import 'package:movie_index/presentation/theme/app_colors.dart';
 
 class App extends StatelessWidget {
   const App({
@@ -17,7 +18,8 @@ class App extends StatelessWidget {
       injector: () => getIt.call,
       child: MaterialApp.router(
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          colorScheme: ColorScheme.fromSeed(seedColor: AppColors.typo),
+          fontFamily: 'Montserrat',
           useMaterial3: true,
         ),
         routeInformationParser: appRouter.defaultRouteParser(),

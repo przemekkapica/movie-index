@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:movie_index/domain/featured_collections/models/featured_movie.dart';
 import 'package:movie_index/presentation/theme/app_dimens.dart';
+import 'package:movie_index/presentation/theme/app_typo.dart';
 
 class CollectionData {
   CollectionData({
@@ -35,7 +36,10 @@ class CollectionCarouselSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title),
+        Text(
+          title,
+          style: AppTypo.v3,
+        ),
         const Gap(AppDimens.v12),
         _CollectionCarousel(collection: collection),
       ],

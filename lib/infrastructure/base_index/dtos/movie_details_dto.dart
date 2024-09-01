@@ -164,7 +164,7 @@ class CastDTO {
   @JsonKey(name: 'id')
   int id;
   @JsonKey(name: 'known_for_department')
-  String knownForDepartment;
+  String? knownForDepartment;
   @JsonKey(name: 'name')
   String name;
   @JsonKey(name: 'original_name')
