@@ -8,6 +8,8 @@ import 'package:movie_index/presentation/pages/discover_page/discover_page_state
 import 'package:movie_index/presentation/pages/discover_page/widgets/collection_carousel_section.dart';
 import 'package:movie_index/presentation/theme/app_colors.dart';
 import 'package:movie_index/presentation/theme/app_dimens.dart';
+import 'package:movie_index/presentation/widgets/general_error_indicator.dart';
+import 'package:movie_index/presentation/widgets/loading_indicator.dart';
 
 @RoutePage()
 class DiscoverPage extends HookWidget {
@@ -31,8 +33,8 @@ class DiscoverPage extends HookWidget {
       body: SafeArea(
         bottom: false,
         child: state.map(
-          loading: (_) => const _LoadingState(),
-          error: (_) => const _ErrorState(),
+          loading: (_) => const LoadingIndicator(),
+          error: (_) => const GeneralErrorIndicator(),
           idle: (state) => _IdleState(state: state),
         ),
       ),
@@ -68,28 +70,6 @@ class _IdleState extends StatelessWidget {
         },
         separatorBuilder: (context, index) => const Gap(AppDimens.v32),
       ),
-    );
-  }
-}
-
-class _LoadingState extends StatelessWidget {
-  const _LoadingState();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: CircularProgressIndicator(),
-    );
-  }
-}
-
-class _ErrorState extends StatelessWidget {
-  const _ErrorState();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Ooops, something went wrong'),
     );
   }
 }

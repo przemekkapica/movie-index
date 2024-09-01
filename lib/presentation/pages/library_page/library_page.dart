@@ -9,6 +9,8 @@ import 'package:movie_index/presentation/pages/library_page/widgets/movie_list_e
 import 'package:movie_index/presentation/theme/app_colors.dart';
 import 'package:movie_index/presentation/theme/app_dimens.dart';
 import 'package:movie_index/presentation/widgets/app_divider.dart';
+import 'package:movie_index/presentation/widgets/general_error_indicator.dart';
+import 'package:movie_index/presentation/widgets/loading_indicator.dart';
 
 @RoutePage()
 class LibraryPage extends HookWidget {
@@ -32,8 +34,8 @@ class LibraryPage extends HookWidget {
       body: SafeArea(
         bottom: false,
         child: state.map(
-          loading: (_) => const _LoadingState(),
-          error: (_) => const _ErrorState(),
+          loading: (_) => const LoadingIndicator(),
+          error: (_) => const GeneralErrorIndicator(),
           idle: (state) => _IdleState(
             cubit: cubit,
             state: state,
@@ -93,28 +95,6 @@ class _IdleState extends HookWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class _LoadingState extends StatelessWidget {
-  const _LoadingState();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: CircularProgressIndicator(),
-    );
-  }
-}
-
-class _ErrorState extends StatelessWidget {
-  const _ErrorState();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Ooops, something went wrong'),
     );
   }
 }

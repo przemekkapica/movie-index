@@ -15,6 +15,8 @@ import 'package:movie_index/presentation/theme/app_colors.dart';
 import 'package:movie_index/presentation/theme/app_dimens.dart';
 import 'package:movie_index/presentation/theme/app_typo.dart';
 import 'package:movie_index/presentation/widgets/app_divider.dart';
+import 'package:movie_index/presentation/widgets/general_error_indicator.dart';
+import 'package:movie_index/presentation/widgets/loading_indicator.dart';
 
 @RoutePage()
 class MovieDetailsPage extends HookWidget {
@@ -57,8 +59,8 @@ class MovieDetailsPage extends HookWidget {
         top: false,
         bottom: false,
         child: state.map(
-          loading: (_) => const _LoadingState(),
-          error: (_) => const _ErrorState(),
+          loading: (_) => const LoadingIndicator(),
+          error: (_) => const GeneralErrorIndicator(),
           idle: (state) => _IdleState(
             state: state,
           ),
@@ -292,28 +294,6 @@ class _SingleInfoSection extends StatelessWidget {
           style: AppTypo.v5.copyWith(color: AppColors.subtypo),
         ),
       ],
-    );
-  }
-}
-
-class _LoadingState extends StatelessWidget {
-  const _LoadingState();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: CircularProgressIndicator(),
-    );
-  }
-}
-
-class _ErrorState extends StatelessWidget {
-  const _ErrorState();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Ooops, something went wrong'),
     );
   }
 }

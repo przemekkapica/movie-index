@@ -86,7 +86,7 @@ class _RatingSection extends StatelessWidget {
         const Gap(AppDimens.v4),
         Text(
           movie.rating.toStringAsFixed(1),
-          style: AppTypo.v5,
+          style: AppTypo.v4,
         ),
         const Gap(AppDimens.v2),
         Text(
