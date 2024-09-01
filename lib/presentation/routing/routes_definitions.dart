@@ -8,7 +8,7 @@ class RoutesDefinitions {
       AdaptiveRoute(
         page: DiscoverRoute.page,
         initial: true,
-      )
+      ),
     ],
   );
 
@@ -18,7 +18,7 @@ class RoutesDefinitions {
       AdaptiveRoute(
         page: LibraryRoute.page,
         initial: true,
-      )
+      ),
     ],
   );
 

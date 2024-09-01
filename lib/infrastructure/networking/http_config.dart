@@ -1,5 +1,5 @@
-import 'package:dio/io.dart';
 import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
 import 'package:injectable/injectable.dart';
 import 'package:movie_index/core/config/env_config.dart';
 import 'package:movie_index/infrastructure/networking/interceptors/tmdb_api_auth_interceptor.dart';

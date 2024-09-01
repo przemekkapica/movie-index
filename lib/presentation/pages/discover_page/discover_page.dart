@@ -17,6 +17,7 @@ class DiscoverPage extends HookWidget {
     useEffect(
       () {
         cubit.init();
+        return;
       },
       [cubit],
     );
