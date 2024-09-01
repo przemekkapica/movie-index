@@ -11,6 +11,6 @@ abstract interface class BaseIndexDataSource {
   @factoryMethod
   factory BaseIndexDataSource(Dio dio) = _BaseIndexDataSource;
 
-  @GET('movie')
+  @GET('discover/movie')
   Future<GetMoviesDTO> getMovies();
 }

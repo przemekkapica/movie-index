@@ -6,6 +6,7 @@ part 'base_movie.freezed.dart';
 abstract class BaseMovie with _$BaseMovie {
   const factory BaseMovie({
     required int id,
+    required String title,
     required double rating,
     required String posterUrl,
     required int voteCount,

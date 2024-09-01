@@ -53,7 +53,7 @@ class _IdleState extends StatelessWidget {
     ];
 
     return Padding(
-      padding: const EdgeInsets.only(left: 12),
+      padding: const EdgeInsets.only(left: 16),
       child: ListView.separated(
         itemCount: featuredCollectionsData.length,
         itemBuilder: (context, index) {

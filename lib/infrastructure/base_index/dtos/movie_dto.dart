@@ -51,6 +51,7 @@ class MovieDTO {
   BaseMovie toDomain() {
     return BaseMovie(
       id: id,
+      title: title,
       rating: voteAverage,
       posterUrl: 'https://image.tmdb.org/t/p/original/$posterPath',
       voteCount: voteCount,
