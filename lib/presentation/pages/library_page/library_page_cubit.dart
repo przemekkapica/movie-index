@@ -15,10 +15,37 @@ class LibraryPageCubit extends Cubit<LibraryPageState> {
     try {
       final movies = await _indexRepository.getMovies();
 
-      emit(LibraryPageState.idle(movies: movies));
-    } catch (error) {
+      emit(
+        LibraryPageState.idle(
+          movies: movies,
+          currentPage: 1,
+          isLoadingNextPage: false,
+        ),
+      );
+    } catch (_) {
       emit(const LibraryPageState.error());
     }
-    return;
+  }
+
+  Future<void> loadNextPage() async {
+    try {
+      if (state.currentPage == null) return;
+
+      final nextPage = state.currentPage! + 1;
+      emit(state.copyWith(isLoadingNextPage: true));
+
+      final nextPageMovies = await _indexRepository.getMovies(page: nextPage);
+      final loadedMovies = state.movies ?? [];
+
+      emit(
+        LibraryPageState.idle(
+          movies: [...loadedMovies, ...nextPageMovies],
+          currentPage: nextPage,
+          isLoadingNextPage: false,
+        ),
+      );
+    } catch (_) {
+      emit(const LibraryPageState.error());
+    }
   }
 }

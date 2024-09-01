@@ -30,17 +30,23 @@ class LibraryPage extends HookWidget {
         child: state.map(
           loading: (_) => const _LoadingState(),
           error: (_) => const _ErrorState(),
-          idle: (state) => _IdleState(state: state),
+          idle: (state) => _IdleState(
+            cubit: cubit,
+            state: state,
+          ),
         ),
       ),
     );
   }
 }
 
-class _IdleState extends StatelessWidget {
+class _IdleState extends HookWidget {
   const _IdleState({
+    required this.cubit,
     required this.state,
   });
+
+  final LibraryPageCubit cubit;
   final LibraryPageStateIdle state;
 
   @override
@@ -49,15 +55,35 @@ class _IdleState extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: ListView.separated(
-        itemCount: movies.length,
-        itemBuilder: (context, index) {
-          final movie = movies[index];
-
-          return MovieListEntry(movie: movie);
+      child: NotificationListener<ScrollEndNotification>(
+        onNotification: (notification) {
+          if (notification.metrics.pixels + 100 >
+              notification.metrics.maxScrollExtent) {
+            cubit.loadNextPage();
+          }
+          return false;
         },
-        separatorBuilder: (context, index) => const Column(
-          children: [Gap(4), Divider(), Gap(8)],
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.separated(
+                itemCount: movies.length,
+                itemBuilder: (context, index) {
+                  final movie = movies[index];
+
+                  return MovieListEntry(movie: movie);
+                },
+                separatorBuilder: (context, index) => const Column(
+                  children: [Gap(4), Divider(), Gap(8)],
+                ),
+              ),
+            ),
+            if (state.isLoadingNextPage) ...[
+              // const Gap(16),
+              const CircularProgressIndicator(),
+              const Gap(16),
+            ],
+          ],
         ),
       ),
     );

@@ -10,8 +10,8 @@ class BaseIndexRepositoryImpl implements BaseIndexRepository {
   final BaseIndexDataSource _dataSource;
 
   @override
-  Future<List<BaseMovie>> getMovies() async {
-    final result = await _dataSource.getMovies();
+  Future<List<BaseMovie>> getMovies({int? page}) async {
+    final result = await _dataSource.getMovies(page);
 
     return result.toDomain();
   }
