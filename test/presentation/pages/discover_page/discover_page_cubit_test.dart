@@ -35,13 +35,13 @@ void main() {
       'emits idle state when receives data',
       build: () => cubit,
       setUp: () {
-        when(() => repository.getNowPlayingMovies())
+        when(repository.getNowPlayingMovies)
             .thenAnswer((_) async => featuredCollection);
-        when(() => repository.getPopularMovies())
+        when(repository.getPopularMovies)
             .thenAnswer((_) async => featuredCollection);
-        when(() => repository.getTopRatedMovies())
+        when(repository.getTopRatedMovies)
             .thenAnswer((_) async => featuredCollection);
-        when(() => repository.getUpcomingMovies())
+        when(repository.getUpcomingMovies)
             .thenAnswer((_) async => featuredCollection);
       },
       act: (cubit) => cubit.init(),
@@ -53,6 +53,13 @@ void main() {
           upcomingMovies: featuredCollection,
         ),
       ],
+      verify: (cubit) {
+        verify(repository.getNowPlayingMovies).called(1);
+        verify(repository.getPopularMovies).called(1);
+        verify(repository.getTopRatedMovies).called(1);
+        verify(repository.getUpcomingMovies).called(1);
+        verifyNoMoreInteractions(repository);
+      },
     );
 
     blocTest<DiscoverPageCubit, DiscoverPageState>(
