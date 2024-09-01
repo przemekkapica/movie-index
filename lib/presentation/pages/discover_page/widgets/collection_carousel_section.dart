@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:movie_index/domain/featured_collections/models/featured_movie.dart';
+import 'package:movie_index/presentation/theme/app_colors.dart';
 import 'package:movie_index/presentation/theme/app_dimens.dart';
 import 'package:movie_index/presentation/theme/app_typo.dart';
 
@@ -66,21 +67,67 @@ class _CollectionCarousel extends StatelessWidget {
       itemBuilder: (context, itemIndex, _) {
         final movieEntry = collection[itemIndex];
 
-        return CachedNetworkImage(
-          fadeInDuration: _fadeInCarouselDuration,
-          fadeOutDuration: _fadeOutCarouselDuration,
-          imageUrl: movieEntry.posterUrl,
-          imageBuilder: (context, imageProvider) {
-            return ClipRRect(
-              borderRadius: const BorderRadius.all(Radius.circular(8)),
-              child: Image(
-                fit: BoxFit.fitWidth,
-                image: imageProvider,
-              ),
-            );
-          },
+        return Stack(
+          children: [
+            CachedNetworkImage(
+              fadeInDuration: _fadeInCarouselDuration,
+              fadeOutDuration: _fadeOutCarouselDuration,
+              imageUrl: movieEntry.posterUrl,
+              imageBuilder: (context, imageProvider) {
+                return ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(8)),
+                  child: Image(
+                    fit: BoxFit.fitWidth,
+                    image: imageProvider,
+                  ),
+                );
+              },
+            ),
+            Positioned(
+              bottom: AppDimens.v4,
+              left: AppDimens.v4,
+              child: _RatingTag(rating: movieEntry.rating),
+            ),
+          ],
         );
       },
+    );
+  }
+}
+
+class _RatingTag extends StatelessWidget {
+  const _RatingTag({
+    required this.rating,
+  });
+
+  final double rating;
+
+  @override
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: AppColors.tag.withOpacity(0.5),
+        borderRadius: const BorderRadius.all(Radius.circular(4)),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppDimens.v4,
+        ),
+        child: Row(
+          children: [
+            const Icon(
+              Icons.star_rate_rounded,
+              size: AppDimens.v12,
+              color: AppColors.typo,
+            ),
+            const Gap(AppDimens.v4),
+            Text(
+              rating.toStringAsFixed(1),
+              style: AppTypo.v7,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
