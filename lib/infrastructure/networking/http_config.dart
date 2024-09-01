@@ -1,3 +1,4 @@
+import 'package:dio/io.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:movie_index/core/config/env_config.dart';
@@ -14,6 +15,9 @@ class HttpConfig with DioMixin implements Dio {
         connectTimeout: _connectTimeout,
         receiveTimeout: _receiveTimeout,
       );
+
+  @override
+  HttpClientAdapter get httpClientAdapter => IOHttpClientAdapter();
 
   @override
   Interceptors get interceptors {

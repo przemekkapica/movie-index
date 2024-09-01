@@ -14,8 +14,8 @@ class TMDBApiAuthInterceptor extends Interceptor {
         await rootBundle.loadString('assets/.tmdb_bearer_token.txt');
 
     options.headers.addAll({
-      'accept: ': 'application/json',
-      'Authorization': 'Bearer $bearerToken'
+      'accept': 'application/json',
+      'Authorization': 'Bearer $bearerToken',
     });
 
     super.onRequest(options, handler);
