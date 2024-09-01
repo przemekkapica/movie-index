@@ -52,7 +52,7 @@ class FeaturedMovieDTO {
     return FeaturedMovie(
       id: id,
       rating: voteAverage,
-      posterUrl: posterPath,
+      posterUrl: 'https://image.tmdb.org/t/p/original/$posterPath',
     );
   }
 }

@@ -63,8 +63,7 @@ class _CollectionCarousel extends StatelessWidget {
         return CachedNetworkImage(
           fadeInDuration: _fadeInCarouselDuration,
           fadeOutDuration: _fadeOutCarouselDuration,
-          imageUrl:
-              'https://image.tmdb.org/t/p/original/${movieEntry.posterUrl}',
+          imageUrl: movieEntry.posterUrl,
           imageBuilder: (context, imageProvider) {
             return ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(8)),
