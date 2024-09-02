@@ -56,7 +56,11 @@ class _IdleState extends HookWidget {
     final movies = state.movies;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppDimens.v16),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppDimens.v16,
+      ).copyWith(
+        top: AppDimens.v16,
+      ),
       child: NotificationListener<ScrollEndNotification>(
         onNotification: (notification) {
           if (notification.metrics.pixels + 100 >

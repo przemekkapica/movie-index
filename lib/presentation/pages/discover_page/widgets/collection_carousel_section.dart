@@ -22,7 +22,7 @@ class CollectionData {
 
 const _fadeInCarouselDuration = Duration(milliseconds: 150);
 const _fadeOutCarouselDuration = Duration(milliseconds: 150);
-const _carouselHeight = 200.0;
+const _posterWidth = 200.0;
 
 class CollectionCarouselSection extends StatelessWidget {
   const CollectionCarouselSection({
@@ -62,27 +62,30 @@ class _CollectionCarousel extends StatelessWidget {
   Widget build(BuildContext context) {
     return CarouselSlider.builder(
       options: CarouselOptions(
-        viewportFraction: 0.4,
-        height: _carouselHeight,
+        viewportFraction: 0.36,
         padEnds: false,
       ),
       itemCount: collection.length,
       itemBuilder: (context, itemIndex, _) {
         final movieEntry = collection[itemIndex];
 
-        return GestureDetector(
-          onTap: () => context.router.push(
-            MovieDetailsRoute(movieId: movieEntry.id),
-          ),
-          child: Stack(
-            children: [
-              _Poster(posterUrl: movieEntry.posterUrl),
-              Positioned(
-                bottom: AppDimens.v4,
-                left: AppDimens.v4,
-                child: _RatingTag(rating: movieEntry.rating),
-              ),
-            ],
+        return Padding(
+          padding: const EdgeInsets.only(right: AppDimens.v12),
+          child: GestureDetector(
+            onTap: () => context.router.push(
+              MovieDetailsRoute(movieId: movieEntry.id),
+            ),
+            child: Stack(
+              fit: StackFit.passthrough,
+              children: [
+                _Poster(posterUrl: movieEntry.posterUrl),
+                Positioned(
+                  bottom: AppDimens.v4,
+                  left: AppDimens.v4,
+                  child: _RatingTag(rating: movieEntry.rating),
+                ),
+              ],
+            ),
           ),
         );
       },
@@ -107,8 +110,9 @@ class _Poster extends StatelessWidget {
         return ClipRRect(
           borderRadius: const BorderRadius.all(Radius.circular(8)),
           child: Image(
-            fit: BoxFit.fitWidth,
+            fit: BoxFit.fitHeight,
             image: imageProvider,
+            width: _posterWidth,
           ),
         );
       },

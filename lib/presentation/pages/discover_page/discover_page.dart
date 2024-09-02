@@ -54,11 +54,22 @@ class _IdleState extends StatelessWidget {
     ];
 
     return Padding(
-      padding: const EdgeInsets.only(left: AppDimens.v16),
+      padding: const EdgeInsets.only(
+        left: AppDimens.v16,
+        top: AppDimens.v16,
+      ),
       child: ListView.separated(
         itemCount: featuredCollectionsData.length,
         itemBuilder: (context, index) {
           final collectionData = featuredCollectionsData[index];
+          if (index == featuredCollectionsData.length - 1) {
+            return Column(
+              children: [
+                CollectionCarouselSection(collectionData: collectionData),
+                const Gap(AppDimens.v16),
+              ],
+            );
+          }
 
           return CollectionCarouselSection(
             collectionData: collectionData,
