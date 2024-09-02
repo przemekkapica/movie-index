@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:movie_index/core/config/env_config.dart';
 import 'package:movie_index/domain/base_index/models/genre.dart';
 import 'package:movie_index/domain/base_index/models/movie_details.dart';
 
@@ -99,7 +100,7 @@ class MovieDetailsDTO {
       id: id,
       title: title,
       description: overview,
-      posterUrl: 'https://image.tmdb.org/t/p/original/$posterPath',
+      posterUrl: EnvConfig.posterBaseUrl + posterPath,
       genres: genres.map((genre) => genre.toDomain()).toList(),
       runtime: Duration(minutes: runtime),
       rating: voteAverage,

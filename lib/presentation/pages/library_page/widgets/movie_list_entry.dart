@@ -8,6 +8,7 @@ import 'package:movie_index/presentation/routing/app_router.gr.dart';
 import 'package:movie_index/presentation/theme/app_colors.dart';
 import 'package:movie_index/presentation/theme/app_dimens.dart';
 import 'package:movie_index/presentation/theme/app_typo.dart';
+import 'package:movie_index/presentation/widgets/rating_icon.dart';
 
 const _posterHeight = 120.0;
 
@@ -77,20 +78,20 @@ class _RatingSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final movieRating = movie.rating.toStringAsFixed(1);
+    final voteCount = '(${movie.voteCount})';
+
     return Row(
       children: [
-        const Icon(
-          Icons.star_rate_rounded,
-          color: AppColors.typo,
-        ),
+        const RatingIcon(),
         const Gap(AppDimens.v4),
         Text(
-          movie.rating.toStringAsFixed(1),
+          movieRating,
           style: AppTypo.v4,
         ),
         const Gap(AppDimens.v2),
         Text(
-          '(${movie.voteCount})',
+          voteCount,
           style: AppTypo.v4.copyWith(color: AppColors.subtypo),
         ),
       ],

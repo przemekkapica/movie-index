@@ -6,8 +6,8 @@ import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:movie_index/presentation/pages/discover_page/discover_page_cubit.dart';
 import 'package:movie_index/presentation/pages/discover_page/discover_page_state.dart';
 import 'package:movie_index/presentation/pages/discover_page/widgets/collection_carousel_section.dart';
-import 'package:movie_index/presentation/theme/app_colors.dart';
 import 'package:movie_index/presentation/theme/app_dimens.dart';
+import 'package:movie_index/presentation/widgets/app_scaffold.dart';
 import 'package:movie_index/presentation/widgets/general_error_indicator.dart';
 import 'package:movie_index/presentation/widgets/loading_indicator.dart';
 
@@ -28,15 +28,11 @@ class DiscoverPage extends HookWidget {
       [cubit],
     );
 
-    return Scaffold(
-      backgroundColor: AppColors.background,
-      body: SafeArea(
-        bottom: false,
-        child: state.map(
-          loading: (_) => const LoadingIndicator(),
-          error: (_) => const GeneralErrorIndicator(),
-          idle: (state) => _IdleState(state: state),
-        ),
+    return PageScaffold(
+      child: state.map(
+        loading: (_) => const LoadingIndicator(),
+        error: (_) => const GeneralErrorIndicator(),
+        idle: (state) => _IdleState(state: state),
       ),
     );
   }

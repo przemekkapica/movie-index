@@ -8,6 +8,7 @@ import 'package:movie_index/presentation/routing/app_router.gr.dart';
 import 'package:movie_index/presentation/theme/app_colors.dart';
 import 'package:movie_index/presentation/theme/app_dimens.dart';
 import 'package:movie_index/presentation/theme/app_typo.dart';
+import 'package:movie_index/presentation/widgets/rating_icon.dart';
 
 class CollectionData {
   CollectionData({
@@ -135,11 +136,7 @@ class _RatingTag extends StatelessWidget {
         ),
         child: Row(
           children: [
-            const Icon(
-              Icons.star_rate_rounded,
-              size: AppDimens.v12,
-              color: AppColors.typo,
-            ),
+            const RatingIcon(size: AppDimens.v12),
             const Gap(AppDimens.v4),
             Text(
               rating.toStringAsFixed(1),

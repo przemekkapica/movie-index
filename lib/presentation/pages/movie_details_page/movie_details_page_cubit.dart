@@ -13,8 +13,8 @@ class MovieDetailsPageCubit extends Cubit<MovieDetailsPageState> {
 
   Future<void> init({required int movieId}) async {
     try {
-      final movieDetails =
-          await _indexRepository.getMovieDetails(movieId, null);
+      final movieDetails = await _indexRepository.getMovieDetails(movieId);
+
       emit(MovieDetailsPageState.idle(movieDetails: movieDetails));
     } catch (_) {
       emit(const MovieDetailsPageState.error());

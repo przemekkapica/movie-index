@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:movie_index/core/config/env_config.dart';
 import 'package:movie_index/domain/featured_collections/models/featured_movie.dart';
 
 part 'featured_movie_dto.g.dart';
@@ -52,7 +53,7 @@ class FeaturedMovieDTO {
     return FeaturedMovie(
       id: id,
       rating: voteAverage,
-      posterUrl: 'https://image.tmdb.org/t/p/original/$posterPath',
+      posterUrl: EnvConfig.posterBaseUrl + posterPath,
     );
   }
 }

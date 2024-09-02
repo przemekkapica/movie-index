@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:movie_index/core/config/env_config.dart';
 import 'package:movie_index/domain/base_index/models/base_movie.dart';
 
 part 'movie_dto.g.dart';
@@ -53,7 +54,7 @@ class MovieDTO {
       id: id,
       title: title,
       rating: voteAverage,
-      posterUrl: 'https://image.tmdb.org/t/p/original/$posterPath',
+      posterUrl: EnvConfig.posterBaseUrl + posterPath,
       voteCount: voteCount,
       releaseDate: DateTime.parse(releaseDate),
     );

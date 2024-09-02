@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 
+const _bearerTokenLocation = 'assets/.tmdb_bearer_token.txt';
+
 class TMDBApiAuthInterceptor extends Interceptor {
   const TMDBApiAuthInterceptor();
 
@@ -10,8 +12,8 @@ class TMDBApiAuthInterceptor extends Interceptor {
     RequestInterceptorHandler handler,
   ) async {
     // TODO: Change getting bearer token approach
-    final bearerToken =
-        await rootBundle.loadString('assets/.tmdb_bearer_token.txt');
+    final bearerToken = await rootBundle.loadString(_bearerTokenLocation);
+
     options.headers.addAll({
       'accept': 'application/json',
       'Authorization': 'Bearer $bearerToken',

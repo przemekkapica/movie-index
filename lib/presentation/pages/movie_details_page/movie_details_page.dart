@@ -17,6 +17,7 @@ import 'package:movie_index/presentation/theme/app_typo.dart';
 import 'package:movie_index/presentation/widgets/app_divider.dart';
 import 'package:movie_index/presentation/widgets/general_error_indicator.dart';
 import 'package:movie_index/presentation/widgets/loading_indicator.dart';
+import 'package:movie_index/presentation/widgets/rating_icon.dart';
 
 @RoutePage()
 class MovieDetailsPage extends HookWidget {
@@ -83,7 +84,9 @@ class _IdleState extends HookWidget {
 
     return Stack(
       children: [
-        _GradientOnPosterBackground(posterUrl: details.posterUrl),
+        _GradientOnPosterBackground(
+          posterUrl: details.posterUrl,
+        ),
         _DetailsMainContent(
           details: state.movieDetails,
         ),
@@ -173,6 +176,9 @@ class _RatingSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final rating = details.rating.toStringAsFixed(1);
+    final votesCount = '(${details.voteCount})';
+
     return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(AppDimens.v4),
@@ -183,18 +189,15 @@ class _RatingSection extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(
-              Icons.star_rate_rounded,
-              color: AppColors.typo,
-            ),
+            const RatingIcon(),
             const Gap(AppDimens.v4),
             Text(
-              details.rating.toStringAsFixed(1),
+              rating,
               style: AppTypo.v2,
             ),
             const Gap(AppDimens.v2),
             Text(
-              '(${details.voteCount})',
+              votesCount,
               style: AppTypo.v4.copyWith(color: AppColors.subtypo),
             ),
           ],
@@ -214,27 +217,26 @@ class _BaseInfoSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final typo = AppTypo.v8.copyWith(color: AppColors.subtypo);
+    const separator = '|';
+    final genres = details.genres
+        .sublist(0, min(details.genres.length, 3))
+        .map((genre) => genre.name)
+        .toList()
+        .join(', ');
 
     return Row(
       children: [
         Text(details.releaseDate.formatYYYY, style: typo),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: AppDimens.v8),
-          child: Text('|', style: typo),
+          child: Text(separator, style: typo),
         ),
         Text(details.runtime.formatHHmm, style: typo),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: AppDimens.v8),
-          child: Text('|', style: typo),
+          child: Text(separator, style: typo),
         ),
-        Text(
-          details.genres
-              .sublist(0, min(details.genres.length, 3))
-              .map((genre) => genre.name)
-              .toList()
-              .join(', '),
-          style: typo,
-        ),
+        Text(genres, style: typo),
       ],
     );
   }

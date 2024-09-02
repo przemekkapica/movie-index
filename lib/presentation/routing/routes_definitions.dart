@@ -2,6 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:movie_index/presentation/routing/app_router.gr.dart';
 
 class RoutesDefinitions {
+  static final _movieDetailsRoute = AdaptiveRoute(
+    page: MovieDetailsRoute.page,
+  );
+
   static final _discoverTabRoute = AdaptiveRoute(
     page: DiscoverTabRouter.page,
     children: [
@@ -9,7 +13,7 @@ class RoutesDefinitions {
         page: DiscoverRoute.page,
         initial: true,
       ),
-      AdaptiveRoute(page: MovieDetailsRoute.page),
+      _movieDetailsRoute,
     ],
   );
 
@@ -20,7 +24,7 @@ class RoutesDefinitions {
         page: LibraryRoute.page,
         initial: true,
       ),
-      AdaptiveRoute(page: MovieDetailsRoute.page),
+      _movieDetailsRoute,
     ],
   );
 

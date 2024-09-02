@@ -6,9 +6,9 @@ import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:movie_index/presentation/pages/library_page/library_page_cubit.dart';
 import 'package:movie_index/presentation/pages/library_page/library_page_state.dart';
 import 'package:movie_index/presentation/pages/library_page/widgets/movie_list_entry.dart';
-import 'package:movie_index/presentation/theme/app_colors.dart';
 import 'package:movie_index/presentation/theme/app_dimens.dart';
 import 'package:movie_index/presentation/widgets/app_divider.dart';
+import 'package:movie_index/presentation/widgets/app_scaffold.dart';
 import 'package:movie_index/presentation/widgets/general_error_indicator.dart';
 import 'package:movie_index/presentation/widgets/loading_indicator.dart';
 
@@ -29,17 +29,13 @@ class LibraryPage extends HookWidget {
       [],
     );
 
-    return Scaffold(
-      backgroundColor: AppColors.background,
-      body: SafeArea(
-        bottom: false,
-        child: state.map(
-          loading: (_) => const LoadingIndicator(),
-          error: (_) => const GeneralErrorIndicator(),
-          idle: (state) => _IdleState(
-            cubit: cubit,
-            state: state,
-          ),
+    return PageScaffold(
+      child: state.map(
+        loading: (_) => const LoadingIndicator(),
+        error: (_) => const GeneralErrorIndicator(),
+        idle: (state) => _IdleState(
+          cubit: cubit,
+          state: state,
         ),
       ),
     );

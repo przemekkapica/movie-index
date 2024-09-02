@@ -19,9 +19,10 @@ class BaseIndexRepositoryImpl implements BaseIndexRepository {
 
   @override
   Future<MovieDetails> getMovieDetails(
-    int id,
+    int id, [
     String? extraParams,
-  ) async {
+  ]) async {
+    // By default details endpoint don't return data about movie cast and crew
     final params = extraParams ?? 'credits';
     final result = await _dataSource.getMovieDetails(
       id.toString(),

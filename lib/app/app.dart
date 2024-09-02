@@ -17,14 +17,18 @@ class App extends StatelessWidget {
     return HookedBlocConfigProvider(
       injector: () => getIt.call,
       child: MaterialApp.router(
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: AppColors.typo),
-          fontFamily: 'Montserrat',
-          useMaterial3: true,
-        ),
+        theme: _getThemeData(),
         routeInformationParser: appRouter.defaultRouteParser(),
         routerDelegate: appRouter.delegate(),
       ),
+    );
+  }
+
+  ThemeData _getThemeData() {
+    return ThemeData(
+      colorScheme: ColorScheme.fromSeed(seedColor: AppColors.typo),
+      fontFamily: 'Montserrat',
+      useMaterial3: true,
     );
   }
 }
