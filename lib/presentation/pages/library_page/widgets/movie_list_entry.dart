@@ -23,6 +23,7 @@ class MovieListEntry extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onTap: () {
         context.router.push(MovieDetailsRoute(movieId: movie.id));
       },
