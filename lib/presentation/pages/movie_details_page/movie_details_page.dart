@@ -108,7 +108,7 @@ class _DetailsMainContent extends StatelessWidget {
       if (details.directorName != null) ('Director', details.directorName!),
       ('Production', details.productionCountries.join(', ')),
       ('Distributor', details.distributors.join(', ')),
-      ('Release Date', details.releaseDate.formatYYYY),
+      ('Release Date', details.releaseDate.formatddMMYYY),
       ('Original Language', details.originalLanguage),
       ('Budget', '\$${details.budget}'),
     ];
