@@ -104,8 +104,8 @@ class MovieDetailsDTO {
       runtime: Duration(minutes: runtime),
       rating: voteAverage,
       voteCount: voteCount,
-      directorName: credits.cast
-          .where((cast) => cast.job == 'Director')
+      directorName: credits.crew
+          .where((crew) => crew.job == 'Director')
           .firstOrNull
           ?.name,
       productionCountries:

@@ -15,7 +15,6 @@ class MovieDetailsPageCubit extends Cubit<MovieDetailsPageState> {
     try {
       final movieDetails =
           await _indexRepository.getMovieDetails(movieId, null);
-
       emit(MovieDetailsPageState.idle(movieDetails: movieDetails));
     } catch (_) {
       emit(const MovieDetailsPageState.error());
