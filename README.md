@@ -3,6 +3,12 @@
 This is a simple movies library mobile application utilizing The Movie Database (TMDB) public REST API.<br>
 Welcome :)
 
+<p float="left">
+    <img src="assets/img/demo1.png" width="240" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <img src="assets/img/demo3.png" width="240" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <img src="assets/img/demo2.png" width="240" />
+</p>
+
 ## Getting Started
 
 ### Getting TMDB API key

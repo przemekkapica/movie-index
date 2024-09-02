@@ -11,7 +11,6 @@ class TMDBApiAuthInterceptor extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    // TODO: Change getting bearer token approach
     final bearerToken = await rootBundle.loadString(_bearerTokenLocation);
 
     options.headers.addAll({

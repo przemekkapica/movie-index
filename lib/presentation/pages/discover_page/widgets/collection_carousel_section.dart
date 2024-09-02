@@ -23,6 +23,7 @@ class CollectionData {
 const _fadeInCarouselDuration = Duration(milliseconds: 150);
 const _fadeOutCarouselDuration = Duration(milliseconds: 150);
 const _posterWidth = 200.0;
+const _carouselViewportFraction = 0.36;
 
 class CollectionCarouselSection extends StatelessWidget {
   const CollectionCarouselSection({
@@ -62,7 +63,7 @@ class _CollectionCarousel extends StatelessWidget {
   Widget build(BuildContext context) {
     return CarouselSlider.builder(
       options: CarouselOptions(
-        viewportFraction: 0.36,
+        viewportFraction: _carouselViewportFraction,
         padEnds: false,
       ),
       itemCount: collection.length,

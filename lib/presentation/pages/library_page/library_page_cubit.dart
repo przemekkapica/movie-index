@@ -36,10 +36,11 @@ class LibraryPageCubit extends Cubit<LibraryPageState> {
 
       final nextPageMovies = await _indexRepository.getMovies(page: nextPage);
       final loadedMovies = state.movies ?? [];
+      final combinedMovies = [...loadedMovies, ...nextPageMovies];
 
       emit(
         LibraryPageState.idle(
-          movies: [...loadedMovies, ...nextPageMovies],
+          movies: combinedMovies,
           currentPage: nextPage,
           isLoadingNextPage: false,
         ),
