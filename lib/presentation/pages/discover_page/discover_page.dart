@@ -62,14 +62,6 @@ class _IdleState extends StatelessWidget {
         itemCount: featuredCollectionsData.length,
         itemBuilder: (context, index) {
           final collectionData = featuredCollectionsData[index];
-          if (index == featuredCollectionsData.length - 1) {
-            return Column(
-              children: [
-                CollectionCarouselSection(collectionData: collectionData),
-                const Gap(AppDimens.v16),
-              ],
-            );
-          }
 
           return CollectionCarouselSection(
             collectionData: collectionData,

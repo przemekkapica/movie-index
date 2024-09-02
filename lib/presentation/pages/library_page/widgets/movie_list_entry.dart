@@ -8,9 +8,11 @@ import 'package:movie_index/presentation/routing/app_router.gr.dart';
 import 'package:movie_index/presentation/theme/app_colors.dart';
 import 'package:movie_index/presentation/theme/app_dimens.dart';
 import 'package:movie_index/presentation/theme/app_typo.dart';
+import 'package:movie_index/presentation/widgets/loading_indicator.dart';
 import 'package:movie_index/presentation/widgets/rating_icon.dart';
 
 const _posterHeight = 120.0;
+const _posterWidth = 90.0;
 
 class MovieListEntry extends StatelessWidget {
   const MovieListEntry({
@@ -111,15 +113,25 @@ class _MoviePoster extends StatelessWidget {
   Widget build(BuildContext context) {
     return CachedNetworkImage(
       imageUrl: movie.posterUrl,
+      height: _posterHeight,
       imageBuilder: (context, imageProvider) {
         return ClipRRect(
           borderRadius: const BorderRadius.all(
             Radius.circular(AppDimens.v4),
           ),
-          child: Image(image: imageProvider),
+          child: Image(
+            image: imageProvider,
+            width: _posterWidth,
+            fit: BoxFit.fitWidth,
+          ),
         );
       },
-      height: _posterHeight,
+      placeholder: (context, _) {
+        return const SizedBox(
+          width: _posterWidth,
+          child: LoadingIndicator(),
+        );
+      },
     );
   }
 }
